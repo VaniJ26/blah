@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Page Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .container {
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+        input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .link a {
+            color: #333;
+            text-decoration: none;
+        }
+        .link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Page -->
+    <div id="login-page" class="container">
+        <h1>Login</h1>
+        <form onsubmit="handleLogin(event)">
+            <label for="login-name">Name</label>
+            <input type="text" id="login-name" required>
+
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" required>
+
+            <label>
+                <input type="checkbox" id="remember-me"> Remember Me
+            </label>
+
+            <button type="submit">Login</button>
+        </form>
+        <div class="link">
+            <a href="#" onclick="showSignUpPage()">Sign Up</a>
+        </div>
+    </div>
+
+    <!-- Sign Up Page -->
+    <div id="signup-page" class="container" style="display: none;">
+        <h1>Sign Up</h1>
+        <form onsubmit="handleSignUp(event)">
+            <label for="signup-name">Name</label>
+            <input type="text" id="signup-name" required>
+
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" required>
+
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" required>
+
+            <button type="submit">Sign Up</button>
+        </form>
+        <div class="link">
+            <a href="#" onclick="showLoginPage()">Back to Login</a>
+        </div>
+    </div>
+
+    <!-- Form Page -->
+    <div id="form-page" class="container" style="display: none;">
+        <h1>Your Details</h1>
+        <form onsubmit="handleFormSubmit(event)">
+            <label for="name">Name</label>
+            <input type="text" id="name" required>
+
+            <label for="number">Number</label>
+            <input type="number" id="number" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+
+            <label for="birth-date">Birth Date</label>
+            <input type="date" id="birth-date" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Profile Page -->
+    <div id="profile-page" class="container" style="display: none;">
+        <h1>Profile</h1>
+        <p><strong>Name:</strong> <span id="profile-name"></span></p>
+        <p><strong>Number:</strong> <span id="profile-number"></span></p>
+        <p><strong>Email:</strong> <span id="profile-email"></span></p>
+        <p><strong>Birth Date:</strong> <span id="profile-birth-date"></span></p>
+    </div>
+
+    <script>
+        function showLoginPage() {
+            document.getElementById('login-page').style.display = 'block';
+            document.getElementById('signup-page').style.display = 'none';
+            document.getElementById('form-page').style.display = 'none';
+            document.getElementById('profile-page').style.display = 'none';
+        }
+
+        function showSignUpPage() {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('signup-page').style.display = 'block';
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            alert('Login Successful!');
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('form-page').style.display = 'block';
+        }
+
+        function handleSignUp(event) {
+            event.preventDefault();
+            alert('Sign Up Complete!');
+            showLoginPage();
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const number = document.getElementById('number').value;
+            const email = document.getElementById('email').value;
+            const birthDate = document.getElementById('birth-date').value;
+
+            document.getElementById('profile-name').innerText = name;
+            document.getElementById('profile-number').innerText = number;
+            document.getElementById('profile-email').innerText = email;
+            document.getElementById('profile-birth-date').innerText = birthDate;
+
+            document.getElementById('form-page').style.display = 'none';
+            document.getElementById('profile-page').style.display = 'block';
+        }
+
+        // Initialize the page to the login screen
+        showLoginPage();
+    </script>
+</body>
+</html>
